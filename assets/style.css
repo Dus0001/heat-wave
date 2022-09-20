@@ -1,0 +1,58 @@
+.header-container {
+    background-color: rgb(0, 71, 185);
+}
+main {
+display: flex;
+flex-direction: row;
+}
+
+.card-left {
+width: 30%;
+padding-bottom: 50px;
+}
+
+input {
+width: 100%;
+border: 1px solid black;
+margin-bottom: 10px;
+}
+.page-header {
+display: flex;
+justify-content: flex-end;
+color: white;
+}
+
+.search-btn {
+background-color: rgb(94, 149, 221);
+width: 100%;
+margin-bottom: 10px;
+border-radius: 8px;
+}
+.search-btn:hover {
+    background-color: aqua;
+}
+li {
+    list-style: none;
+}
+
+ul {
+border-top: 2px solid gray;
+}
+.history-btn {
+margin-top: 5px;
+background-color: gray;
+width: 100%;
+border-radius: 8px;
+}
+
+.card-right {
+margin: 0%;
+display: flex;
+flex-direction: column;
+justify-content: flex-end;
+}
+
+.five-day-forecast{
+    display:inline-block;
+    align-items: center;
+}
