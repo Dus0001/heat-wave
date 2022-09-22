@@ -1,7 +1,7 @@
 var cityNameEl = document.querySelector("#city-input");
 var bntParentEl = document.querySelector("#search-history-btns");
 var searchBtn = document.querySelector(".search-btn");
-//get city name and convert to lon lat
+//get city name to convert to lon lat
 var formsubmission = function(event) {
     event.preventDefault();
 
@@ -23,13 +23,41 @@ var formsubmission = function(event) {
     }     
 };
 
+//convert city name to long and lat coordinates
 var getCityCoords = function(cityName){
 
-    var coordUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + cityName + ",&limit=3&appid=094ac0392f9eb792b651f89871fc381b";
+    var coordUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + cityName + ",&limit=1&appid=094ac0392f9eb792b651f89871fc381b";
     
-  
+    fetch(coordUrl)
+    .then (function(response){
+        if(response.ok){
+            response.json().then(function(data){
+                console.log(data);
+                getWeatherData(data[0].lat, data[0].lon)
+                cityNameEl.textContent="";
+            })
+        }else {
+            alert("Reenter City name!")
+        }
+    });
+
+};
+
+//get city weather using long and lat
+
+var getWeatherData = function (lat, lon){
+var weahterUrl = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&" + "lon=" + lon + "&appid=094ac0392f9eb792b651f89871fc381b"
+
+fetch(weahterUrl)
+.then(function(response){
+if(response.ok){
+    response.json().then(function(data){
+        console.log(data);
+
+    })
 }
-//get city weather
+})
+};
 
 //display weather info
 
