@@ -1,8 +1,9 @@
 var cityNameEl = document.querySelector("#city-input");
 var bntParentEl = document.querySelector("#search-history-btns");
 var searchBtn = document.querySelector(".search-btn");
-var currentCityDate = document.querySelector(".current-date")
+var currentCityEl = document.querySelector(".current-date")
 var currentDateEl = document.querySelector(".current-date")
+var currentCnditsContrEl = document.querySelector(".current-conditions")
 //get city name to convert to lon lat
 var formsubmission = function(event) {
     event.preventDefault();
@@ -55,24 +56,46 @@ fetch(weahterUrl)
 if(response.ok){
     response.json().then(function(data){
         //console.log(data);
-        displayWeather(data);
+        displayCurrentWeather(data);
     })
 }
 })
 };
 
 // display the data in the DOM
-var displayWeather = function(data){
+var displayCurrentWeather = function(data){
 //display the current consitions
 console.log(data)
 dataList = data.list
+
+currentCnditsContrEl.innerHTML=" "
+
 for (var i=0; i<dataList.length; i++){
-    currentCityDate.innerHTML = (data.city.name);
-   console.log(currentCityDate.value);
+    currentCityEl.innerHTML = (data.city.name);
    var currentDate = data.list[0].dt_txt.split(" ")[0];
-   currentDateEl.innerHTML=(data.city.name)+(currentDate);
+   currentDateEl.innerHTML=(data.city.name)+(" ")+(currentDate);
+   var currentIcon = data.list[0].weather[0].icon;
+   var currentWeatherIconEl= document.createElement("img");
+   currentWeatherIconEl.setAttribute("src", "http://openweathermap.org/img/wn/" + currentIcon + "@2x.png");
+   currentDateEl.append(currentWeatherIconEl);
 
+   // display the current temp, wind and humidity
+   var currentTempEl = document.createElement("h5")
+   var currentWindEl = document.createElement("h5")
+   var currentHumidityEl = document.createElement("h5")
+   var currentTemp = data.list[0].main.temp;
+   var currentWind = data.list[0].wind.speed;
+   var currentHumidity = data.list[0].main.humidity
+   console.log(currentTemp)
+   currentTempEl.innerHTML = "Temp:" + currentTemp + "°C";
+   currentWindEl.innerHTML = "Wind:" + currentWind + "mph";
+   currentHumidityEl.innerHTML = "Humidity:" + currentHumidity + "%";
 
+   currentCnditsContrEl.appendChild(currentTempEl);
+   currentCnditsContrEl.appendChild(currentWindEl);
+   currentCnditsContrEl.appendChild(currentHumidityEl);
+
+break;
 }
 
 
