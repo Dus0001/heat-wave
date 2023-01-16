@@ -49,7 +49,7 @@ var getCityCoords = function(cityName){
 //get city weather using long and lat
 
 var getWeatherData = function (lat, lon){
-var weahterUrl = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&" + "lon=" + lon + "&per_page=5&appid=094ac0392f9eb792b651f89871fc381b"
+var weahterUrl = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&" + "lon=" + lon + "&per_page=5&appid=094ac0392f9eb792b651f89871fc381b&units=imperial"
 
 fetch(weahterUrl)
 .then(function(response){
@@ -57,6 +57,7 @@ if(response.ok){
     response.json().then(function(data){
         //console.log(data);
         displayCurrentWeather(data);
+        displayFutureWeather(data);
     })
 }
 })
@@ -97,17 +98,28 @@ for (var i=0; i<dataList.length; i++){
 
 break;
 }
-
+};
 
 
 // display the next 5 days
-}
+var displayFutureWeather = function(data){
+    var dataList=data.list;
+for(i=1; i<dataList.length; i++)
+    var futureDate = data.list[i].dt_txt;
+    var futureTemp = data.list.main.temp;
+    var futureWind = data.wind.speed;
+    var futureHumidity = data.main.humidity;
+    console.log(futureTemp)
+    console.log(futureWind)
+    console.log(futureHumidity)
+    console.log(futureDate)
 
+    };
 //display weather info
 
 //reload city search history when clicked
 
 //add event listener to submit button and run getusername
-searchBtn.addEventListener("click", formsubmission)
+searchBtn.addEventListener("click", formsubmission);
 
 //add eventlistener to reload city from search history
