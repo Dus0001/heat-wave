@@ -22,7 +22,7 @@
     An interactive weather app that displays weather based on location.
 
   ## Link
-    (https://github.com/Dus0001/scantron)
+    (https://dus0001.github.io/heat-wave/)
 
   ## Install
     Open the deployed app link.
